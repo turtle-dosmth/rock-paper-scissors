@@ -21,41 +21,60 @@ function getCpuChoice() {
 //   prompt("Please select your choice [1=ROCK, 2=PAPER, 3=SCISSORS]: "),
 // );
 function getUserChoice() {
-  let userAns = "";
-  let userChoice = parseInt(
-    prompt("Please select your choice [1=ROCK, 2=PAPER, 3=SCISSORS]: "),
+  let userChoice = prompt(
+    "Please select your choice [ROCK, PAPER, SCISSORS]: ",
   );
-  while (true) {
-    if (userChoice === 1) {
-      userAns = "rock";
-      break;
-    } else if (userChoice === 2) {
-      userAns = "scissors";
-      break;
-    } else if (userChoice === 3) {
-      userAns = "paper";
-      break;
-    } else {
-      userChoice = parseInt(
-        prompt(
-          "Wrong choice! please try again [1=ROCK, 2=PAPER, 3=SCISSORS]: ",
-        ),
-      );
-      continue;
-    }
-  }
-
-  return userAns;
+  return userChoice.toLowerCase();
 }
 
 // console.log(getUserChoice());
-// use while loop to get the rounds (bo5)
-do {
-let round = 0
+
+let userScore = 0;
+let cpuScore = 0;
+
+function playRound(userChoice, cpuChoice) {
+  if (userChoice === "rock" && cpuChoice === "scissors") {
+    console.log("Player win!");
+    userScore++;
+  } else if (userChoice === "paper" && cpuChoice === "rock") {
+    console.log("Player win!");
+    userScore++;
+  } else if (userChoice === "scissors" && cpuChoice === "paper") {
+    console.log("Player win!");
+    userScore++;
+  } else if (cpuChoice === "rock" && userChoice === "scissors") {
+    console.log("CPU Win!");
+    cpuScore++;
+  } else if (cpuChoice === "paper" && userChoice === "rock") {
+    console.log("CPU Win!");
+    cpuScore++;
+  } else if (cpuChoice === "scissors" && userChoice === "paper") {
+    console.log("CPU Win!");
+    cpuScore++;
+  } else {
+    console.log("Tie! again!");
+    return true;
+  }
+  return false;
 }
-while ( i < 5){
-	let userPoint = 0
-	let cpuPoint = 0
+
+// use while loop to get the rounds (bo5)
+function playGame() {
+  console.log("Welcome to the games current score is:");
+  while (userScore < 5 || cpuScore < 5) {
+    console.log("User: " + userScore + "CPU: " + cpuScore);
+    console.log("Now the games begin!");
+    playRound(getUserChoice(), getCpuChoice());
+    if (userScore === 5) {
+      console.log("Congrat!, you win!");
+      break;
+    } else if (cpuScore === 5) {
+      console.log("Sorry, lets try again next time!");
+      break;
+    }
+  }
+}
+
+playGame();
 // rock win against scissors | scissors win against paper | paper win against rock
-		
 // print who wins
